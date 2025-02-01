@@ -1,6 +1,7 @@
 # AnnotationConfigurationScan 
 
-Mark classes for field-level processing. The processor will run on specific annotated fields  within these classes.
+Ideally, when we use annotation for a field, we need to scan all classes and from that class we need to scan all fields. And it will take very long performance, so we add a new anotation: **AnnotationConfigurationScan** and we only scan fields of class that have annation: **@AnnotationConfigurationScan**
+
 ```
 @AnnotationConfigurationScan(processor = MyAnnotationProcessor.class, fieldAnnotation = MyFieldAnnotation.class)
 ```
