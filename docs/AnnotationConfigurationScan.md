@@ -1,6 +1,13 @@
 # AnnotationConfigurationScan 
 
 Mark classes for field-level processing. The processor will run on specific annotated fields  within these classes.
+```
+@AnnotationConfigurationScan(processor = MyAnnotationProcessor.class, fieldAnnotation = MyFieldAnnotation.class)
+```
+With this config:
+
+- Scan on fields have annotation: **MyFieldAnnotation**
+- The processor is: **MyAnnotationProcessor** and method **MyAnnotationProcessor.processField** will be invoked.
 
 ## How to use
 
@@ -13,7 +20,7 @@ public class AutoConfigWithoutMyConfigAnnotation {
     private TestServiceWithoutMyConfigAnnotation testClass2Service;
 }
 ```
-
+=> will invoke MyAnnotationProcessor.processField(TestServiceWithMyConfigAnnotation.class, \<Instance of MyFieldAnnotation\>)
 ### 2. Use on your custom annotation
 
 Create your custom annotation
@@ -32,7 +39,7 @@ public class AutoConfigWithMyConfigAnnotation {
     private TestServiceWithMyConfigAnnotation testClass1Service;
 }
 ```
-
+=> will invoke MyAnnotationProcessor.processField(TestServiceWithMyConfigAnnotation.class, \<Instance of MyFieldAnnotation\>)
 ### 3. Use with original Spring class annotations: @Configuration
 
 You can also scan your field anntation with @Configuration by update **AnnotationFieldProperty getAnnotationFieldProperty()** from your processor **MyAnnotationProcessor**
@@ -62,5 +69,5 @@ public class MyAnnotationProcessor extends AbstractAnnotationProcessor {
     //....
 }
 ```
-
+=> will invoke MyAnnotationProcessor.processField(TestServiceWithMyConfigAnnotation.class, \<Instance of MyFieldAnnotation\>)
 
