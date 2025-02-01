@@ -20,7 +20,7 @@ public class AutoConfigWithoutMyConfigAnnotation {
     private TestServiceWithoutMyConfigAnnotation testClass2Service;
 }
 ```
-=> will invoke MyAnnotationProcessor.processField(TestServiceWithMyConfigAnnotation.class, \<Instance of MyFieldAnnotation\>)
+=> will invoke MyAnnotationProcessor.processField(TestServiceWithoutMyConfigAnnotation.class, \<Instance of MyFieldAnnotation\>)
 ### 2. Use on your custom annotation
 
 Create your custom annotation
@@ -39,7 +39,7 @@ public class AutoConfigWithMyConfigAnnotation {
     private TestServiceWithMyConfigAnnotation testClass1Service;
 }
 ```
-=> will invoke MyAnnotationProcessor.processField(TestServiceWithMyConfigAnnotation.class, \<Instance of MyFieldAnnotation\>)
+=> will invoke MyAnnotationProcessor.processField(AutoConfigWithMyConfigAnnotation.class, \<Instance of MyFieldAnnotation\>)
 ### 3. Use with original Spring class annotations: @Configuration
 
 You can also scan your field anntation with @Configuration by update **AnnotationFieldProperty getAnnotationFieldProperty()** from your processor **MyAnnotationProcessor**
@@ -69,5 +69,5 @@ public class MyAnnotationProcessor extends AbstractAnnotationProcessor {
     //....
 }
 ```
-=> will invoke MyAnnotationProcessor.processField(TestServiceWithMyConfigAnnotation.class, \<Instance of MyFieldAnnotation\>)
+=> will invoke MyAnnotationProcessor.processField(TestServiceWithOriginalSpringConfiguration.class, \<Instance of MyFieldAnnotation\>)
 
